@@ -1,0 +1,100 @@
+
+@import url('https://fonts.cdnfonts.com/css/berlin-sans-fb');
+
+body {
+  font-family: 'Berlin Sans FB Bold', sans-serif;
+}
+
+
+.card-body {
+  text-align: center;
+}
+
+.carousel-indicators {
+  justify-content: space-between;
+  margin-bottom: 0;
+  padding: 0 1rem;
+}
+
+.carousel-indicators li {
+  visibility: hidden;
+}
+.carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: gray;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  max-height: 250px;
+  object-fit: contain;
+}
+
+.btn-transparent {
+  background-color: transparent;
+  color: orangered;
+  border: none;
+  font-weight: bold;
+}
+
+.btn-transparent:hover {
+  color: black;
+}
+
+.btn-colored {
+  background-color: transparent;
+  color: black;
+  border: none;
+}
+
+.btn-colored:hover {
+  color: orangered;
+}
+.mt-5 {
+  margin-top: 10rem;
+}
+
+.d-flex.justify-content-between {
+  margin-top: 2rem;
+}
+
+.custom-carousel-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 7%;
+}
+
+.custom-carousel-btn i {
+  font-size: 2rem;
+}
+
+.custom-carousel-btn:hover,
+.custom-carousel-btn:focus {
+  background-color: orangered;
+}
+.carousel-indicator-buttons {
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .custom-carousel-btn {
+    padding: 8px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .custom-carousel-btn {
+    padding: 6px;
+    font-size: 1rem;
+  }
+}
