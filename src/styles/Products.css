@@ -86,6 +86,10 @@ body {
   padding: 0 1rem;
 }
 
+
+
+
+
 @media (max-width: 768px) {
   .custom-carousel-btn {
     padding: 8px;
@@ -97,5 +101,26 @@ body {
   .custom-carousel-btn {
     padding: 6px;
     font-size: 1rem;
+  }
+}
+
+
+@media (max-width: 991px) {
+
+  .card {
+    width: 16rem; 
+  }
+}
+
+@media (max-width: 767px) {
+  
+  .card {
+    width: 14rem; 
+  }
+}
+
+@media (max-width: 210px) {
+  h2.text-center {
+    font-size: 2rem !important; 
   }
 }

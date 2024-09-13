@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Navbar.css";
 import backgroundImage from "../assets/banner-bg.png";
 import logo from "../assets/logo.png";
@@ -11,6 +11,8 @@ import {
   FormControl,
   Dropdown,
   Carousel,
+  Navbar as BootstrapNavbar,
+  Nav,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,6 +20,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [expanded, setExpanded] = useState(false);
 
   const handleLoginClick = () => {
     navigate("/adminPanel");
@@ -36,35 +39,34 @@ const Navbar = () => {
         </div>
       </div>
       <div className="navbar-wrapper">
-        <nav className="custom-navbar">
-          <Container>
-            <div className="navbar-list-container">
-              <ul className="navbar-list">
-                <li>
-                  <a href="#home">Best Sellers</a>
-                </li>
-                <li>
-                  <a href="#about">Gift Ideas</a>
-                </li>
-                <li>
-                  <a href="#services">New Releases</a>
-                </li>
-                <li>
-                  <a href="#contact">Today's Deals</a>
-                </li>
-                <li>
-                  <a href="#contact">Customer Service</a>
-                </li>
-              </ul>
-            </div>
+        <BootstrapNavbar
+          expand="lg"
+          className="custom-navbar"
+          expanded={expanded}
+          onToggle={(expanded) => setExpanded(expanded)}
+        >
+          <Container fluid className="navbar-container">
+            <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
+            <BootstrapNavbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto navbar-list">
+                <Nav.Link href="#home">Best Sellers</Nav.Link>
+                <Nav.Link href="#about">Gift Ideas</Nav.Link>
+                <Nav.Link href="#services">New Releases</Nav.Link>
+                <Nav.Link href="#contact">Today's Deals</Nav.Link>
+                <Nav.Link href="#contact">Customer Service</Nav.Link>
+              </Nav>
+            </BootstrapNavbar.Collapse>
           </Container>
-        </nav>
+        </BootstrapNavbar>
         <Container>
-          <div className="looking-wrapper d-flex justify-content-between align-items-center mt-3">
-            <Button variant="outline-secondary" className="custom-icon-button">
+          <div className="looking-wrapper d-flex flex-wrap justify-content-between align-items-center mt-3">
+            <Button
+              variant="outline-secondary"
+              className="custom-icon-button d-lg-none"
+            >
               <i className="bi bi-list"></i>
             </Button>
-            <Dropdown className="ml-2">
+            <Dropdown className="ml-2 mb-2 mb-md-0">
               <Dropdown.Toggle
                 className="custom-dropdown-toggle"
                 variant="outline-dark"
@@ -79,18 +81,22 @@ const Navbar = () => {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            <Form className="d-flex">
+            <Form className="d-flex flex-grow-1 mx-2 mb-2 mb-md-0">
               <FormControl
                 type="text"
                 placeholder="Search this Blog"
-                className="mr-2"
-                style={{ backgroundColor: "white", color: "black" }}
+                className="mr-2 flex-grow-1"
+                style={{
+                  backgroundColor: "white",
+                  color: "black",
+                  width: "70%",
+                }}
               />
               <Button className="search-button" variant="outline-success">
                 <i className="bi bi-search" style={{ color: "white" }}></i>
               </Button>
             </Form>
-            <Dropdown className="ml-2">
+            <Dropdown className="ml-2 mb-2 mb-md-0">
               <Dropdown.Toggle
                 className="custom-dropdown-toggle1"
                 variant="outline-dark"
@@ -105,20 +111,25 @@ const Navbar = () => {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            <Button className="custom-text-button">
-              <i className="bi bi-cart-fill" style={{ marginRight: "8px" }}></i>{" "}
-              CART
-            </Button>
-            <Button
-              className="custom-text-button ml-2"
-              onClick={handleLoginClick}
-            >
-              <i
-                className="bi bi-person-fill"
-                style={{ marginRight: "8px" }}
-              ></i>{" "}
-              LOGIN
-            </Button>
+            <div>
+              <Button className="custom-text-button mb-2 mb-md-0">
+                <i
+                  className="bi bi-cart-fill"
+                  style={{ marginRight: "8px" }}
+                ></i>{" "}
+                CART
+              </Button>
+              <Button
+                className="custom-text-button ml-2"
+                onClick={handleLoginClick}
+              >
+                <i
+                  className="bi bi-person-fill"
+                  style={{ marginRight: "8px" }}
+                ></i>{" "}
+                LOGIN
+              </Button>
+            </div>
           </div>
         </Container>
         <Container className="carousel-container">
@@ -132,7 +143,6 @@ const Navbar = () => {
                 </h3>
                 <Button variant="primary">BUY NOW</Button>
               </div>
-              <Carousel.Caption></Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={500}>
               <div className="carousel-content">
@@ -143,7 +153,6 @@ const Navbar = () => {
                 </h3>
                 <Button variant="primary">BUY NOW</Button>
               </div>
-              <Carousel.Caption></Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
               <div className="carousel-content">
@@ -154,7 +163,6 @@ const Navbar = () => {
                 </h3>
                 <Button variant="primary">BUY NOW</Button>
               </div>
-              <Carousel.Caption></Carousel.Caption>
             </Carousel.Item>
           </Carousel>
         </Container>

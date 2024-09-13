@@ -2,7 +2,7 @@
   "products": [
     {
       "id": "1",
-      "name": "Eknoor",
+      "name": "Hwllo",
       "price": "3000",
       "category": "Fashion",
       "imageSrc": "https://imgd.aeplcdn.com/370x208/n/cw/ec/129743/duke-200-right-side-view-2.jpeg?isig=0&q=80"
@@ -44,7 +44,7 @@
     },
     {
       "id": "7",
-      "name": "Iphone",
+      "name": "iPhone",
       "price": "2000",
       "category": "Tech",
       "imageSrc": "https://m.media-amazon.com/images/I/41biRVTcO5L._SL500_.jpg"
@@ -69,20 +69,6 @@
       "price": "200",
       "category": "Tech",
       "imageSrc": "https://cdn.shopifycdn.net/s/files/1/0692/5988/6904/files/BA_ALAK_200.1001.png?v=1688611423"
-    },
-    {
-      "id": "11",
-      "name": "Huawei",
-      "price": "200",
-      "category": "Tech",
-      "imageSrc": "https://consumer.huawei.com/content/dam/huawei-cbg-site/common/mkt/pdp/admin-image/phones/mate50-pro/list/mate50-pro-carbon-black.png"
-    },
-    {
-      "id": "12",
-      "name": "OPPO",
-      "price": "3000",
-      "category": "Tech",
-      "imageSrc": "https://www.oppo.com/content/dam/oppo-campaign-site/in/events/oppo-product/image-link/march-2023/OPPO_F27_Pro+_5G_Midnight_Navy_frontback_1200x1200.jpg"
     },
     {
       "id": "13",
@@ -125,6 +111,13 @@
       "price": "400",
       "category": "Jewel",
       "imageSrc": "https://media.istockphoto.com/id/147701852/photo/diamond-ring.jpg?s=612x612&w=0&k=20&c=NEULbg-uB8ZEKl4wQUr3l3BPqi4dU9pSkubukDw27wo="
+    },
+    {
+      "id": "19",
+      "name": "Nike Air Force 1",
+      "price": "200",
+      "category": "Fashion",
+      "imageSrc": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRZqY6zm0EC3l_JDN1uvuYvj4ZKCaj_bnRW4bsVC8W4OU34SuoqcvbBUeCIePKTuu38IcDDjjdbxAaboK07cSXydIdd-9MF4dgTpz_OQwJcthXO-4Y-APqkPQ&usqp=CAE"
     }
   ]
 }

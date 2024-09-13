@@ -8,11 +8,14 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 const Electronics = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [products, setProducts] = useState([]);
+  const [productsPerSlide, setProductsPerSlide] = useState(3);
 
   const fetchProducts = async () => {
     try {
       const response = await axios.get("http://localhost:3001/products");
-      setProducts(response.data.filter(product => product.category === "Tech"));
+      setProducts(
+        response.data.filter((product) => product.category === "Tech")
+      );
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -22,20 +25,37 @@ const Electronics = () => {
     fetchProducts();
   }, []);
 
-  const handleSelect = (selectedIndex) => {
-    setActiveIndex(selectedIndex);
-  };
+  useEffect(() => {
+    const updateProductsPerSlide = () => {
+      if (window.innerWidth <= 767) {
+        setProductsPerSlide(1);
+      } else if (window.innerWidth <= 991) {
+        setProductsPerSlide(2);
+      } else {
+        setProductsPerSlide(3);
+      }
+    };
+
+    window.addEventListener("resize", updateProductsPerSlide);
+    updateProductsPerSlide();
+
+    return () => window.removeEventListener("resize", updateProductsPerSlide);
+  }, []);
 
   const groupedProducts = products.reduce((acc, product, index) => {
-    if (index % 3 === 0) acc.push([]);
+    if (index % productsPerSlide === 0) acc.push([]);
     acc[acc.length - 1].push(product);
     return acc;
   }, []);
 
+  const handleSelect = (selectedIndex) => {
+    setActiveIndex(selectedIndex);
+  };
+
   return (
     <div className="container my-5 position-relative">
       <h2
-        className="text-center mb-4"
+        className="text-center1 mb-4"
         style={{ marginTop: "2rem", fontWeight: "bold", fontSize: "xxx-large" }}
       >
         Electronics
@@ -54,7 +74,7 @@ const Electronics = () => {
               {group.map((product) => (
                 <div
                   key={product.id}
-                  className="col-lg-4 col-md-6 mb-4 d-flex justify-content-center"
+                  className={`col-lg-${12 / productsPerSlide} col-md-${12 / productsPerSlide} mb-4 d-flex justify-content-center`}
                 >
                   <div className="card p-3 shadow" style={{ width: "18rem" }}>
                     <img
@@ -64,7 +84,9 @@ const Electronics = () => {
                       style={{ width: "100%", height: "auto" }}
                     />
                     <div className="card-body">
-                      <b><h4 className="card-title">{product.name}</h4></b>
+                      <b>
+                        <h4 className="card-title">{product.name}</h4>
+                      </b>
                       <p className="text-danger">Price $ {product.price}</p>
                       <div className="d-flex justify-content-between">
                         <button className="btn btn-transparent">Buy Now</button>

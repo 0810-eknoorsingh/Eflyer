@@ -7,6 +7,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 const Products = ({ products }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [fashionProducts, setFashionProducts] = useState([]);
+  const [productsPerSlide, setProductsPerSlide] = useState(3); 
 
   useEffect(() => {
     setFashionProducts(
@@ -14,8 +15,30 @@ const Products = ({ products }) => {
     );
   }, [products]);
 
+  useEffect(() => {
+    
+    const updateProductsPerSlide = () => {
+      if (window.innerWidth <= 767) {
+        setProductsPerSlide(1); 
+      } else if (window.innerWidth <= 991) {
+        setProductsPerSlide(2); 
+      } else {
+        setProductsPerSlide(3); 
+      }
+    };
+
+    
+    window.addEventListener("resize", updateProductsPerSlide);
+
+    
+    updateProductsPerSlide();
+
+   
+    return () => window.removeEventListener("resize", updateProductsPerSlide);
+  }, []);
+
   const groupedProducts = fashionProducts.reduce((acc, product, index) => {
-    const groupIndex = Math.floor(index / 3);
+    const groupIndex = Math.floor(index / productsPerSlide);
     if (!acc[groupIndex]) acc[groupIndex] = [];
     acc[groupIndex].push(product);
     return acc;
@@ -47,7 +70,7 @@ const Products = ({ products }) => {
               {group.map((product) => (
                 <div
                   key={product.id}
-                  className="col-lg-4 col-md-6 mb-4 d-flex justify-content-center"
+                  className={`col-lg-${12 / productsPerSlide} col-md-${12 / productsPerSlide} mb-4 d-flex justify-content-center`}
                 >
                   <div className="card p-3 shadow" style={{ width: "18rem" }}>
                     <img

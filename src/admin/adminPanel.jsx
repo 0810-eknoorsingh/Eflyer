@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../styles/AdminPanel.css"; 
+import "../styles/AdminPanel.css";
 
 const AdminPanel = () => {
   const [products, setProducts] = useState([]);
@@ -10,9 +10,9 @@ const AdminPanel = () => {
     category: "",
     imageSrc: "",
   });
-  const [editProduct, setEditProduct] = useState(null); 
+  const [editProduct, setEditProduct] = useState(null);
 
-  const API_URL = "http://localhost:3001/products"; 
+  const API_URL = "http://localhost:3001/products";
 
   useEffect(() => {
     fetchProducts();
@@ -42,17 +42,20 @@ const AdminPanel = () => {
       alert("Please fill out all fields.");
       return;
     }
-  
+
     try {
-      
       const response = await axios.get(API_URL);
       const products = response.data;
-      const highestId = products.reduce((max, product) => Math.max(max, parseInt(product.id, 10)), 0);
-  
-      
-      const newProductWithId = { ...newProduct, id: (highestId + 1).toString() };
-      
-      
+      const highestId = products.reduce(
+        (max, product) => Math.max(max, parseInt(product.id, 10)),
+        0
+      );
+
+      const newProductWithId = {
+        ...newProduct,
+        id: (highestId + 1).toString(),
+      };
+
       const addResponse = await axios.post(API_URL, newProductWithId);
       setProducts([...products, addResponse.data]);
       setNewProduct({
@@ -68,13 +71,16 @@ const AdminPanel = () => {
 
   const updateProduct = async (updatedProduct) => {
     try {
-      const response = await axios.put(`${API_URL}/${updatedProduct.id}`, updatedProduct);
+      const response = await axios.put(
+        `${API_URL}/${updatedProduct.id}`,
+        updatedProduct
+      );
       setProducts(
         products.map((product) =>
           product.id === updatedProduct.id ? response.data : product
         )
       );
-      setEditProduct(null); 
+      setEditProduct(null);
     } catch (error) {
       console.error("Error updating product:", error);
     }
@@ -103,10 +109,14 @@ const AdminPanel = () => {
 
   return (
     <div className="admin-panel">
-      <h1 className="admin-title"><b>ADMIN PANEL</b></h1>
+      <h1 className="admin-title">
+        <b>ADMIN PANEL</b>
+      </h1>
 
       <div className="add-product-form">
-        <h2><u>ADD NEW PRODUCT</u></h2>
+        <h2>
+          <u>ADD NEW PRODUCT</u>
+        </h2>
         <input
           type="text"
           name="name"
@@ -202,7 +212,9 @@ const AdminPanel = () => {
               />
               <h3>{product.name}</h3>
               <p>Price: ${product.price}</p>
-              <p>Category: <b>{product.category}</b></p>
+              <p>
+                Category: <b>{product.category}</b>
+              </p>
               <div className="product-actions">
                 <button
                   onClick={() => deleteProduct(product.id)}
@@ -214,7 +226,7 @@ const AdminPanel = () => {
                   onClick={() => handleUpdateProduct(product)}
                   className="update-btn"
                 >
-                  Update Details 
+                  Update Details
                 </button>
               </div>
             </div>
