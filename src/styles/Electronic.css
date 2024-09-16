@@ -15,8 +15,33 @@ body {
 }
 
 .carousel-indicators li {
-  visibility: hidden;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: gray;
+  margin: 0 4px;
 }
+
+
+@media (max-width: 991px) {
+  .carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 8px; 
+    background-color: #ccc; 
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-indicators li {
+    width: 8px;
+    height: 8px;
+    border-radius: 10px; 
+    background-color: #999; 
+  }
+}
+
 .carousel-indicators button {
   width: 10px;
   height: 10px;
@@ -78,34 +103,13 @@ body {
 
 .custom-carousel-btn:hover,
 .custom-carousel-btn:focus {
-  background-color: orangered;
+  background-color: orange;
 }
 
 .carousel-indicator-buttons {
   padding: 0 1rem;
 }
 
-.text-danger {
-  font-size: 20px;
-}
-
-.card-title {
-  font-weight: bold;
-}
-
-@media (max-width: 991px) {
-  /* Styling for 2 products per slide */
-  .card {
-    width: 16rem;
-  }
-}
-
-@media (max-width: 767px) {
-  /* Styling for 1 product per slide */
-  .card {
-    width: 14rem;
-  }
-}
 
 @media (max-width: 768px) {
   .custom-carousel-btn {
@@ -121,9 +125,32 @@ body {
   }
 }
 
+@media (max-width: 991px) {
+  .card {
+    width: 16rem; 
+  }
+}
+
+@media (max-width: 767px) {
+  .card {
+    width: 14rem; 
+  }
+}
 
 @media (max-width: 210px) {
-  h2.text-center1 {
-    font-size: 1.6rem !important; 
+  h2.text-center {
+    font-size: 2rem !important; 
+  }
+}
+
+@media (max-width: 180px) {
+  .btn-colored {
+    display: none;
+  }
+}
+
+@media (max-width: 400px){
+  .custom-carousel-btn i {
+    display: none;
   }
 }

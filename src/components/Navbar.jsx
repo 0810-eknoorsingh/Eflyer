@@ -53,7 +53,7 @@ const Navbar = () => {
                 <Nav.Link href="#about">Gift Ideas</Nav.Link>
                 <Nav.Link href="#services">New Releases</Nav.Link>
                 <Nav.Link href="#contact">Today's Deals</Nav.Link>
-                <Nav.Link href="#contact">Customer Service</Nav.Link>
+                <Nav.Link href="#contact1">Customer Service</Nav.Link>
               </Nav>
             </BootstrapNavbar.Collapse>
           </Container>

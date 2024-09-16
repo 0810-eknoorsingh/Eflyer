@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/AdminPanel.css";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Modal from "../components/Modal";
 
 const AdminPanel = () => {
   const [products, setProducts] = useState([]);
@@ -11,6 +14,7 @@ const AdminPanel = () => {
     imageSrc: "",
   });
   const [editProduct, setEditProduct] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const API_URL = "http://localhost:3001/products";
 
@@ -81,6 +85,7 @@ const AdminPanel = () => {
         )
       );
       setEditProduct(null);
+      setModalOpen(false);
     } catch (error) {
       console.error("Error updating product:", error);
     }
@@ -88,6 +93,7 @@ const AdminPanel = () => {
 
   const handleUpdateProduct = (product) => {
     setEditProduct(product);
+    setModalOpen(true);
   };
 
   const handleSaveUpdate = () => {
@@ -108,132 +114,148 @@ const AdminPanel = () => {
   };
 
   return (
-    <div className="admin-panel">
-      <h1 className="admin-title">
-        <b>ADMIN PANEL</b>
-      </h1>
+    <>
+      <Navbar />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
 
-      <div className="add-product-form">
-        <h2>
-          <u>ADD NEW PRODUCT</u>
-        </h2>
-        <input
-          type="text"
-          name="name"
-          value={newProduct.name}
-          placeholder="Product Name"
-          onChange={handleInputChange}
-          className="input-field"
-        />
-        <input
-          type="number"
-          name="price"
-          value={newProduct.price}
-          placeholder="Price"
-          onChange={handleInputChange}
-          className="input-field"
-        />
-        <input
-          type="text"
-          name="category"
-          value={newProduct.category}
-          placeholder="Category"
-          onChange={handleInputChange}
-          className="input-field"
-        />
-        <input
-          type="text"
-          name="imageSrc"
-          value={newProduct.imageSrc}
-          placeholder="Image URL"
-          onChange={handleInputChange}
-          className="input-field"
-        />
-        <button onClick={addProduct} className="add-btn">
-          Add Product
-        </button>
-      </div>
 
-      {editProduct && (
-        <div className="edit-product-form">
-          <h2>Edit Product</h2>
+
+      <div className="admin-panel">
+        <h1 className="admin-title">
+          <b>ADMIN PANEL</b>
+        </h1>
+
+        <div className="add-product-form">
+          <h2>
+            <u>ADD NEW PRODUCT</u>
+          </h2>
           <input
             type="text"
             name="name"
-            value={editProduct.name}
+            value={newProduct.name}
             placeholder="Product Name"
-            onChange={handleEditChange}
+            onChange={handleInputChange}
             className="input-field"
           />
           <input
             type="number"
             name="price"
-            value={editProduct.price}
+            value={newProduct.price}
             placeholder="Price"
-            onChange={handleEditChange}
+            onChange={handleInputChange}
             className="input-field"
           />
           <input
             type="text"
             name="category"
-            value={editProduct.category}
+            value={newProduct.category}
             placeholder="Category"
-            onChange={handleEditChange}
+            onChange={handleInputChange}
             className="input-field"
           />
           <input
             type="text"
             name="imageSrc"
-            value={editProduct.imageSrc}
+            value={newProduct.imageSrc}
             placeholder="Image URL"
-            onChange={handleEditChange}
+            onChange={handleInputChange}
             className="input-field"
           />
-          <button onClick={handleSaveUpdate} className="update-btn">
-            Save Changes
-          </button>
-          <button onClick={() => setEditProduct(null)} className="cancel-btn">
-            Cancel
+          <button onClick={addProduct} className="add-btn">
+            Add Product
           </button>
         </div>
-      )}
 
-      <div className="product-list">
-        <h2>Product List</h2>
-        {products.length === 0 ? (
-          <p>No products available. Please add some products.</p>
-        ) : (
-          products.map((product) => (
-            <div key={product.id} className="product-item">
-              <img
-                src={product.imageSrc}
-                alt={product.name}
-                className="product-image"
-              />
-              <h3>{product.name}</h3>
-              <p>Price: ${product.price}</p>
-              <p>
-                Category: <b>{product.category}</b>
-              </p>
-              <div className="product-actions">
-                <button
-                  onClick={() => deleteProduct(product.id)}
-                  className="delete-btn"
-                >
-                  Delete
-                </button>
-                <button
-                  onClick={() => handleUpdateProduct(product)}
-                  className="update-btn"
-                >
-                  Update Details
-                </button>
+        <div className="product-list">
+          <h2><b><u>Product List</u></b></h2>
+          {products.length === 0 ? (
+            <p>No products available. Please add some products.</p>
+          ) : (
+            products.map((product) => (
+              <div key={product.id} className="product-item">
+                <img
+                  src={product.imageSrc}
+                  alt={product.name}
+                  className="product-image"
+                />
+                <div className="product-details">
+                  <h3>{product.name}</h3>
+                  <p style={{color: "green"}}>Price: ${product.price}</p>
+                  <p>
+                    Category: <b>{product.category}</b>
+                  </p>
+                </div>
+                <div className="product-actions">
+                  <button
+                    onClick={() => deleteProduct(product.id)}
+                    className="delete-btn"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    onClick={() => handleUpdateProduct(product)}
+                    className="update-btn"
+                  >
+                    Update Details
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
+            ))
+          )}
+        </div>
+
+        {modalOpen && (
+          <Modal
+            title="Edit Product"
+            onClose={() => setModalOpen(false)}
+            onSave={handleSaveUpdate}
+          >
+            <input
+              type="text"
+              name="name"
+              value={editProduct.name}
+              placeholder="Product Name"
+              onChange={handleEditChange}
+              className="input-field"
+            />
+            <input
+              type="number"
+              name="price"
+              value={editProduct.price}
+              placeholder="Price"
+              onChange={handleEditChange}
+              className="input-field"
+            />
+            <input
+              type="text"
+              name="category"
+              value={editProduct.category}
+              placeholder="Category"
+              onChange={handleEditChange}
+              className="input-field"
+            />
+            <input
+              type="text"
+              name="imageSrc"
+              value={editProduct.imageSrc}
+              placeholder="Image URL"
+              onChange={handleEditChange}
+              className="input-field"
+            />
+          </Modal>
         )}
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

@@ -15,7 +15,6 @@ const Jewellery = ({ products }) => {
     );
   }, [products]);
 
-  
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 767) {
@@ -33,7 +32,6 @@ const Jewellery = ({ products }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  
   const groupedProducts = jewelleryProducts.reduce((acc, product, index) => {
     const groupIndex = Math.floor(index / itemsPerSlide);
     if (!acc[groupIndex]) acc[groupIndex] = [];
@@ -48,7 +46,7 @@ const Jewellery = ({ products }) => {
   return (
     <div className="container my-5 position-relative">
       <h2
-        className="text-center2 mb-4"
+        className="text-center mb-4"
         style={{ marginTop: "2rem", fontWeight: "bold", fontSize: "xxx-large" }}
       >
         Jewellery

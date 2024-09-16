@@ -1,0 +1,112 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal-container {
+    background: #fff;
+    border-radius: 8px;
+    width: 90%; 
+    max-width: 500px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow-y: auto; 
+  }
+  
+  .modal-header, .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem; 
+  }
+  
+  .close-btn, .save-btn, .cancel-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+  
+  .close-btn {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .save-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 4px;
+  }
+  
+  .cancel-btn {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 4px;
+  }
+  
+  .save-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #c82333;
+  }
+  
+  .modal-body {
+    margin: 20px 0;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .modal-container {
+      width: 95%; 
+    }
+  
+    .modal-header h2 {
+      font-size: 1.2rem; 
+    }
+  
+    .close-btn, .save-btn, .cancel-btn {
+      font-size: 1rem; 
+    }
+  
+    .save-btn, .cancel-btn {
+      padding: 8px 12px; 
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .modal-container {
+      width: 100%; 
+      max-width: none; 
+      border-radius: 0; 
+    }
+  
+    .modal-header h2 {
+      font-size: 1rem; 
+    }
+  
+    .close-btn, .save-btn, .cancel-btn {
+      font-size: 0.9rem; 
+    }
+  
+    .save-btn, .cancel-btn {
+      padding: 6px 10px; 
+    }
+  }
+  
