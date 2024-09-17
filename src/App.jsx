@@ -17,14 +17,10 @@ import AdminPanel from "./admin/adminPanel";
 import AdminLogin from "./components/AdminLogin";
 import { AuthProvider, useAuth } from "./components/AuthContext"; 
 import { Navigate } from 'react-router-dom';
-
-
 const PrivateRoute = ({ element, ...rest }) => {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? element : <Navigate to="/adminLogin" />;
 };
-
-
 function App() {
   const [products, setProducts] = useState([]);
 
@@ -84,11 +80,9 @@ function App() {
     </AuthProvider>
   );
 }
-
 const AppContent = ({ products, addProduct, deleteProduct, updateProduct }) => {
   const location = useLocation();
   const showNavbar = location.pathname !== "/adminLogin";
-
   return (
     <>
       {showNavbar && <Navbar />}

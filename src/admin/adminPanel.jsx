@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/AdminPanel.css";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Modal from "../components/Modal";
 
@@ -120,6 +119,8 @@ const AdminPanel = () => {
       <br />
       <br />
       <br />
+      <br />
+
       <div className="admin-panel">
         <h1 className="admin-title">
           <b>ADMIN PANEL</b>

@@ -26,14 +26,8 @@ const Products = ({ products }) => {
         setProductsPerSlide(3); 
       }
     };
-
-    
     window.addEventListener("resize", updateProductsPerSlide);
-
-    
     updateProductsPerSlide();
-
-   
     return () => window.removeEventListener("resize", updateProductsPerSlide);
   }, []);
 

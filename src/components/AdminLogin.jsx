@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext"; 
 import styled from 'styled-components';
-import img from '../assets/logo.png';
 
 const LoginContainer = styled.div`
   display: flex;
@@ -53,6 +52,22 @@ const Button = styled.button`
   }
 `;
 
+const BackButton = styled.button`
+  padding: 0.75rem;
+  background: #6c757d;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #5a6268;
+  }
+`;
+
 const ErrorMessage = styled.p`
   color: #d9534f;
   font-size: 0.875rem;
@@ -77,8 +92,13 @@ const AdminLogin = () => {
     }
   };
 
+  const handleBack = () => {
+    navigate("/");
+  };
+
   return (
     <LoginContainer>
+      <BackButton onClick={handleBack}>Back to Homepage</BackButton>
       <Heading>Admin Login</Heading>
       <Form onSubmit={handleLogin}>
         <Input
