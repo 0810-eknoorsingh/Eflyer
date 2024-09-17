@@ -115,20 +115,11 @@ const AdminPanel = () => {
 
   return (
     <>
-      <Navbar />
       <br />
       <br />
       <br />
       <br />
       <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
-
-
       <div className="admin-panel">
         <h1 className="admin-title">
           <b>ADMIN PANEL</b>

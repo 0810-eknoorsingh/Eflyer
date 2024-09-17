@@ -14,14 +14,21 @@ import Electronics from "./components/Electronic";
 import Jewellery from "./components/Jewellery";
 import Footer from "./components/Footer";
 import AdminPanel from "./admin/adminPanel";
+import AdminLogin from "./components/AdminLogin";
+import { AuthProvider, useAuth } from "./components/AuthContext"; 
+import { Navigate } from 'react-router-dom';
 
+
+const PrivateRoute = ({ element, ...rest }) => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? element : <Navigate to="/adminLogin" />;
+};
 
 
 function App() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-  
     const fetchProducts = async () => {
       try {
         const response = await axios.get("http://localhost:3001/products");
@@ -33,7 +40,6 @@ function App() {
     fetchProducts();
   }, []);
 
-  
   const addProduct = async (product) => {
     try {
       const response = await axios.post("http://localhost:3001/products", product);
@@ -43,7 +49,6 @@ function App() {
     }
   };
 
-  
   const deleteProduct = async (id) => {
     try {
       await axios.delete(`http://localhost:3001/products/${id}`);
@@ -53,7 +58,6 @@ function App() {
     }
   };
 
-  
   const updateProduct = async (updatedProduct) => {
     try {
       await axios.put(`http://localhost:3001/products/${updatedProduct.id}`, updatedProduct);
@@ -68,22 +72,22 @@ function App() {
   };
 
   return (
-    <Router>
-      <div>
+    <AuthProvider>
+      <Router>
         <AppContent
           products={products}
           addProduct={addProduct}
           deleteProduct={deleteProduct}
           updateProduct={updateProduct}
         />
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 
 const AppContent = ({ products, addProduct, deleteProduct, updateProduct }) => {
   const location = useLocation();
-  const showNavbar = location.pathname !== "/adminPanel";
+  const showNavbar = location.pathname !== "/adminLogin";
 
   return (
     <>
@@ -98,13 +102,6 @@ const AppContent = ({ products, addProduct, deleteProduct, updateProduct }) => {
             <br />
             <br />
             <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-
-
               <ProductList products={products} />
               <Electronics products={products} />
               <Jewellery products={products} />
@@ -112,15 +109,19 @@ const AppContent = ({ products, addProduct, deleteProduct, updateProduct }) => {
             </>
           }
         />
-
+        <Route path="/adminLogin" element={<AdminLogin />} />
         <Route
           path="/adminPanel"
           element={
-            <AdminPanel
-              products={products}
-              addProduct={addProduct}
-              deleteProduct={deleteProduct}
-              updateProduct={updateProduct}
+            <PrivateRoute
+              element={
+                <AdminPanel
+                  products={products}
+                  addProduct={addProduct}
+                  deleteProduct={deleteProduct}
+                  updateProduct={updateProduct}
+                />
+              }
             />
           }
         />

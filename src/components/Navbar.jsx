@@ -23,7 +23,7 @@ const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
 
   const handleLoginClick = () => {
-    navigate("/adminPanel");
+    navigate("/adminLogin");
   };
 
   return (
